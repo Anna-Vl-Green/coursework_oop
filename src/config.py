@@ -1,0 +1,3 @@
+DATA_DIRECTORY = 'data'
+DATA_FILENAME = 'vacancies'
+DEFAULT_EXTENSION = 'json'

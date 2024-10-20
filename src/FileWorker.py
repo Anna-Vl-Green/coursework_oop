@@ -6,8 +6,12 @@ from ReadWriteFile import ReadWriteFile
 
 
 class FileWorker(ReadWriteFile):
+    """
+    Класс для создания и обработки файла
+    """
 
     def __init__(self, filename=config.DATA_FILENAME, extension=config.DEFAULT_EXTENSION):
+        """ Конструктор для класса FileWorker"""
         os.mkdir(config.DATA_DIRECTORY)
         self.file_name = f'{filename}.{extension}'
         self.extension = extension
@@ -15,6 +19,7 @@ class FileWorker(ReadWriteFile):
         self.file_path = os.path.join(os.getcwd(), config.DATA_DIRECTORY, self.file_name)
 
     def _check_extension(self):
+        """ Метод для проверки разрешения файла """
         match self.extension.lower():
             case 'json':
                 pass
@@ -22,6 +27,7 @@ class FileWorker(ReadWriteFile):
                 raise ValueError(f'Некорректное значение расширения файла: {self.extension}')
 
     def read_file(self) -> dict:
+        """ Метод для чтения файла """
         if os.path.isfile(self.file_path):
             with open(self.file_path, 'r', encoding='utf-8') as file:
                 match self.extension.lower():
@@ -33,6 +39,7 @@ class FileWorker(ReadWriteFile):
             raise ValueError(f'Файл не существует: {self.file_path}')
 
     def write_file(self, json_text):
+        """ Метод для записи данных в файл """
         with open(self.file_path, 'w', encoding='utf-8') as file:
             match self.extension.lower():
                 case 'json':
